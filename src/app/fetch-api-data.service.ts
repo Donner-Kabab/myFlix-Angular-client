@@ -23,14 +23,11 @@ export class UserRegistrationService {
     console.log(userDetails);
     return this.http
       .post(apiUrl + 'users', userDetails)
-      .pipe(catchError(this.handleError));
   }
   //user login
   public userLogin(userDetails: any): Observable<any> {
     return this.http
     .post(apiUrl + 'login', userDetails)
-    .pipe(catchError(this.handleError));
-
   }
 
   //see all the movies
@@ -42,8 +39,7 @@ export class UserRegistrationService {
           Authorization: 'Bearer ' + token,
         }),
       })
-      .pipe(map(this.extractResponseData), catchError(this.handleError));
-  }
+    }
   // Non-typed response extraction
   private extractResponseData(res: Response): any {
     const body = res;
@@ -59,7 +55,6 @@ export class UserRegistrationService {
         Authorization: 'Bearer' + token,
       }),
     })
-    .pipe(map(this.extractResponseData), catchError(this.handleError));
   }
 
   //search directors
@@ -71,7 +66,6 @@ export class UserRegistrationService {
         Authorization: 'Bearer' + token,
       }),
     })
-    .pipe(map(this.extractResponseData), catchError(this.handleError));
   }
 
   //Search Genre
@@ -83,7 +77,6 @@ export class UserRegistrationService {
         Authorization: 'Bearer' + token,
       }),
     })
-    .pipe(map(this.extractResponseData), catchError(this.handleError));
   }
 
   getUser(): Observable<any> {
@@ -97,8 +90,7 @@ export class UserRegistrationService {
       {
         authorization: 'Bearer' + token,
       }
-    )}).pipe(map(this.extractResponseData),
-  catchError(this.handleError))
+    )})
   }
 
   //add movie to favorites
@@ -110,8 +102,7 @@ export class UserRegistrationService {
         Authorization: 'Bearer' + token,
       }
     )}
-    ).pipe(map(this.extractResponseData), catchError(this.handleError)
-  );
+    )
   }
 
   //edit user information
@@ -121,8 +112,7 @@ export class UserRegistrationService {
       {
         Authorization: 'Bearer' + token,
       }
-    )}).pipe(map(this.extractResponseData), catchError(this.handleError)
-  );
+    )})
   }
 
   deleteUser(): Observable<any> {
@@ -132,8 +122,7 @@ export class UserRegistrationService {
       {
         Authorization: 'Bearer' + token,
       }
-    )}).pipe(map(this.extractResponseData), catchError(this.handleError)
-  );
+    )})
   }
 
   deleteFavoriteMovies(movie: any): Observable<any> {
@@ -143,11 +132,8 @@ export class UserRegistrationService {
       {
         Authorization: 'Bearer' + token,
       }
-    )}).pipe(map(this.extractResponseData), catchError(this.handleError)
-  );
+    )})
   }
-
-
 
   private handleError(error: HttpErrorResponse): any {
     if (error.error instanceof ErrorEvent) {
