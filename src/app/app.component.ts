@@ -19,11 +19,10 @@ export class AppComponent {
       // Assigning the dialog a width
       width: '280px',
     });
-
-  openUserLoginDialog(): void (
+  }
+  openUserLoginDialog(): void {
     this.dialog.open(UserLoginFormComponent, {
       width: "280px",
     });
-  )
   }
 }
