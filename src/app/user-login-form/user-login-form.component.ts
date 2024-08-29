@@ -36,7 +36,7 @@ export class UserLoginFormComponent implements OnInit {
       });
       localStorage.setItem('currentUser', JSON.stringify(result.user));
       localStorage.setItem('token', result.token);
-      //this.router.navigate(['movies']);
+     this.router.navigate(['movies']);
     });
   }
 }
