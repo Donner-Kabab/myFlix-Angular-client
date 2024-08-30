@@ -1,18 +1,19 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { UserRegistrationService } from '../fetch-api-data.service';
-import { Route } from '@angular/router';
-import { MatDialog } from '@angular/material/dialog';
-import { MatSnackBar } from '@angular/material/snack-bar';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-user-profile',
   templateUrl: './user-profile.component.html',
-  styleUrl: './user-profile.component.css',
+  styleUrl: './user-profile.component.scss',
 })
 export class UserProfileComponent implements OnInit {
   userData: any = {};
   favoriteMovies: any[] = [];
-  constructor(public fetchApiData: UserRegistrationService, public router: Router) {
+  constructor(
+    public fetchApiData: UserRegistrationService,
+    public router: Router
+  ) {
     this.userData = JSON.parse(localStorage.getItem('user') || '');
   }
 
@@ -37,12 +38,6 @@ export class UserProfileComponent implements OnInit {
       }
     );
   }
-  resetUser(): void {
-    this.userData = JSON.parse(localStorage.getItem('user') || '');
-  }
-  backToMovie(): void {
-    this.router.navigate(['movies']);
-  }
 
   getfavoriteMovies(): void {
     this.fetchApiData.getAllMovies().subscribe(
@@ -58,7 +53,7 @@ export class UserProfileComponent implements OnInit {
   }
 
   getUser(): void {
-    this.fetchApiData.getUserByID(this.userData.id).subscribe((res: any) => {
+    this.fetchApiData.getUser(this.userData.id).subscribe((res: any) => {
       this.userData = {
         ...res,
         id: res._id,
@@ -72,7 +67,7 @@ export class UserProfileComponent implements OnInit {
 
   removeFromFavorite(movie: any): void {
     this.fetchApiData
-      .deleteFavoriteMovie(this.userData.id, movie.title)
+      .deleteFavoriteMovies(this.userData.id, movie.title)
       .subscribe(
         (res: any) => {
           this.userData.favoriteMovies = res.favoriteMovies;
@@ -82,10 +77,5 @@ export class UserProfileComponent implements OnInit {
           console.error(err);
         }
       );
-  }
-
-  logout(): void {
-    this.router.navigate(['welcome']);
-    localStorage.removeItem('user');
   }
 }
