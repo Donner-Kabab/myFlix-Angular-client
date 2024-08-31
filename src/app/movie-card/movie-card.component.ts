@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { UserRegistrationService } from '../fetch-api-data.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-movie-card',
@@ -8,10 +9,18 @@ import { UserRegistrationService } from '../fetch-api-data.service';
 })
 export class MovieCardComponent implements OnInit {
   movies: any[] = [];
-  constructor(public fetchMovies: UserRegistrationService) {}
+  constructor(
+    public fetchMovies: UserRegistrationService,
+    private router: Router
+  ) {}
 
   ngOnInit(): void {
     this.getMovies();
+  }
+
+  //navigate to profile
+  navigateToUserProfile(): void {
+    this.router.navigate(['/user-profile']);
   }
 
   getMovies(): void {
@@ -24,15 +33,9 @@ export class MovieCardComponent implements OnInit {
 
   favoriteMovies(movie: any): void {}
 
-  showGenre(movie: any): void {
-     
-  }
+  showGenre(movie: any): void {}
 
-  showDirector(movie: any): void {
+  showDirector(movie: any): void {}
 
-  }
-
-  showSynopsis(movie: any): void {
-
-  }
+  showSynopsis(movie: any): void {}
 }
