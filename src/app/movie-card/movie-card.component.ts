@@ -21,4 +21,18 @@ export class MovieCardComponent implements OnInit {
       return this.movies;
     });
   }
+
+  favoriteMovies(movie: any): void {}
+
+  showGenre(movie: any): void {
+     
+  }
+
+  showDirector(movie: any): void {
+
+  }
+
+  showSynopsis(movie: any): void {
+
+  }
 }

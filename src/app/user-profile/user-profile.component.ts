@@ -53,7 +53,7 @@ export class UserProfileComponent implements OnInit {
   }
 
   getUser(): void {
-    this.fetchApiData.getUser(this.userData.id).subscribe((res: any) => {
+    this.fetchApiData.getUser().subscribe((res: any) => {
       this.userData = {
         ...res,
         id: res._id,
@@ -66,16 +66,14 @@ export class UserProfileComponent implements OnInit {
   }
 
   removeFromFavorite(movie: any): void {
-    this.fetchApiData
-      .deleteFavoriteMovies(this.userData.id, movie.title)
-      .subscribe(
-        (res: any) => {
-          this.userData.favoriteMovies = res.favoriteMovies;
-          this.getfavoriteMovies();
-        },
-        (err: any) => {
-          console.error(err);
-        }
-      );
+    this.fetchApiData.deleteFavoriteMovies(movie).subscribe(
+      (res: any) => {
+        this.userData.favoriteMovies = res.favoriteMovies;
+        this.getfavoriteMovies();
+      },
+      (err: any) => {
+        console.error(err);
+      }
+    );
   }
 }
