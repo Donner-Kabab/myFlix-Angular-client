@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { UserRegistrationService } from '../fetch-api-data.service';
 import { Router } from '@angular/router';
+import { MatDialog } from '@angular/material/dialog';
 
 @Component({
   selector: 'app-movie-card',
@@ -11,7 +12,8 @@ export class MovieCardComponent implements OnInit {
   movies: any[] = [];
   constructor(
     public fetchMovies: UserRegistrationService,
-    private router: Router
+    private router: Router,
+    public dialog: MatDialog
   ) {}
 
   ngOnInit(): void {
@@ -33,9 +35,19 @@ export class MovieCardComponent implements OnInit {
 
   favoriteMovies(movie: any): void {}
 
-  showGenre(movie: any): void {}
+  showGenre(movie: any): void {
+    alert(`Name: ${movie.Genre.Name}
+    Description:  ${movie.Genre.Description}`);
+  }
 
-  showDirector(movie: any): void {}
+  showDirector(movie: any): void {
+    alert(`Name: ${movie.Director.Name}
+    Bio:  ${movie.Director.Bio}
+    Birth:  ${movie.Director.Birth}
+    Death:  ${movie.Director.Death}`);
+  }
 
-  showSynopsis(movie: any): void {}
+  showSynopsis(movie: any): void {
+    alert(`Synopsis: Description:  ${movie.Description.slice(0, 50)}...`);
+  }
 }
