@@ -33,7 +33,28 @@ export class MovieCardComponent implements OnInit {
     });
   }
 
-  favoriteMovies(movie: any): void {}
+  addToFavorites(movie: any): void {
+    this.addToFavorites.addToFavorites(movie.Title).subscribe((resp: any) => {
+      const user = JSON.parse(localStorage.getItem('currentUser') || '');
+      user.FavoriteMovies.push(movie.TItle);
+      localStorage.setItem('currentUser', JSON.stringify(user));
+    });
+  }
+
+  removeFromFavorites(movie: any): void {
+    this.removeFromFavorites
+      .removeFromFavorites(movie.Title)
+      .subscribe((resp: any) => {
+        const user = JSON.parse(localStorage.getItem('currentUser') || '');
+        user.FavoriteMovies = user.FavoriteMovies.filter(
+          (title: string) => title !== movie.Title
+        );
+        localStorage.setItem('currentUser', JSON.stringify(user));
+        this.FavoriteMovies = this.addToFavorites.filter(
+          (title: string) => title !== movie.Title
+        );
+      });
+  }
 
   showGenre(movie: any): void {
     alert(`Name: ${movie.Genre.Name}
