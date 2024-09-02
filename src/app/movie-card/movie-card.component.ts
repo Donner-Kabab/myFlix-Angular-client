@@ -47,7 +47,12 @@ export class MovieCardComponent implements OnInit {
     Death:  ${movie.Director.Death}`);
   }
 
+  /**
+   * @param {any} movie
+   * @return {void}
+   * This function shows the synopsis
+   */
   showSynopsis(movie: any): void {
-    alert(`Synopsis: Description:  ${movie.Description.slice(0, 50)}...`);
+    alert(`Synopsis: Description:  ${movie.Description}`);
   }
 }
