@@ -69,7 +69,7 @@ export class UserRegistrationService {
     return this.http
       .get(apiUrl + 'movies/directors/:Name', {
         headers: new HttpHeaders({
-          Authorization: 'Bearer' + token,
+          Authorization: 'Bearer ' + token,
         }),
       })
       .pipe(catchError(this.handleError));
@@ -81,7 +81,7 @@ export class UserRegistrationService {
     return this.http
       .get(apiUrl + 'movies/genre/:Name', {
         headers: new HttpHeaders({
-          Authorization: 'Bearer' + token,
+          Authorization: 'Bearer ' + token,
         }),
       })
       .pipe(catchError(this.handleError));
@@ -97,7 +97,7 @@ export class UserRegistrationService {
     return this.http
       .get(apiUrl + 'users/' + username, {
         headers: new HttpHeaders({
-          authorization: 'Bearer' + token,
+          authorization: 'Bearer ' + token,
         }),
       })
       .pipe(catchError(this.handleError));
@@ -126,7 +126,7 @@ export class UserRegistrationService {
     return this.http
       .put(apiUrl + 'users/' + userDetails.Username, userDetails, {
         headers: new HttpHeaders({
-          Authorization: 'Bearer' + token,
+          Authorization: 'Bearer ' + token,
         }),
       })
       .pipe(catchError(this.handleError));
@@ -138,7 +138,7 @@ export class UserRegistrationService {
     return this.http
       .put(apiUrl + 'users/' + user.Username, {
         headers: new HttpHeaders({
-          Authorization: 'Bearer' + token,
+          Authorization: 'Bearer ' + token,
         }),
       })
       .pipe(catchError(this.handleError));
@@ -148,9 +148,9 @@ export class UserRegistrationService {
     const user = JSON.parse(localStorage.getItem('user') || '{}');
     const token = localStorage.getItem('token');
     return this.http
-      .delete(apiUrl + 'users/' + user.Username + '/movies/' + movie.id, {
+      .delete(apiUrl + 'users/' + user.Username + '/movies/' + movie._id, {
         headers: new HttpHeaders({
-          Authorization: 'Bearer' + token,
+          Authorization: 'Bearer ' + token,
         }),
       })
       .pipe(catchError(this.handleError));
