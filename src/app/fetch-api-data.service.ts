@@ -108,11 +108,15 @@ export class UserRegistrationService {
     const user = JSON.parse(localStorage.getItem('user') || '{}');
     const token = localStorage.getItem('token');
     return this.http
-      .post(apiUrl + 'users/' + user.Username + '/movies/' + movie._id, null, {
-        headers: new HttpHeaders({
-          Authorization: 'Bearer' + token,
-        }),
-      })
+      .post(
+        apiUrl + 'users/' + user.Username + '/movies/' + movie._id,
+        {},
+        {
+          headers: new HttpHeaders({
+            Authorization: 'Bearer ' + token,
+          }),
+        }
+      )
       .pipe(catchError(this.handleError));
   }
 
@@ -144,7 +148,7 @@ export class UserRegistrationService {
     const user = JSON.parse(localStorage.getItem('user') || '{}');
     const token = localStorage.getItem('token');
     return this.http
-      .put(apiUrl + 'users/' + user.Username, +'/movies/' + movie.id, {
+      .delete(apiUrl + 'users/' + user.Username + '/movies/' + movie.id, {
         headers: new HttpHeaders({
           Authorization: 'Bearer' + token,
         }),

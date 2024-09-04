@@ -34,26 +34,21 @@ export class MovieCardComponent implements OnInit {
   }
 
   addToFavorites(movie: any): void {
-    this.addToFavorites.addToFavorites(movie.Title).subscribe((resp: any) => {
-      const user = JSON.parse(localStorage.getItem('currentUser') || '');
-      user.FavoriteMovies.push(movie.TItle);
-      localStorage.setItem('currentUser', JSON.stringify(user));
+    this.fetchMovies.addFavoriteMovies(movie).subscribe((resp: any) => {
+      const user = JSON.parse(localStorage.getItem('user') || '');
+      user.FavoriteMovies.push(movie.Title);
+      localStorage.setItem('user', JSON.stringify(user));
     });
   }
 
   removeFromFavorites(movie: any): void {
-    this.removeFromFavorites
-      .removeFromFavorites(movie.Title)
-      .subscribe((resp: any) => {
-        const user = JSON.parse(localStorage.getItem('currentUser') || '');
-        user.FavoriteMovies = user.FavoriteMovies.filter(
-          (title: string) => title !== movie.Title
-        );
-        localStorage.setItem('currentUser', JSON.stringify(user));
-        this.FavoriteMovies = this.addToFavorites.filter(
-          (title: string) => title !== movie.Title
-        );
-      });
+    this.fetchMovies.deleteFavoriteMovies(movie).subscribe((resp: any) => {
+      const user = JSON.parse(localStorage.getItem('user') || '');
+      user.FavoriteMovies = user.FavoriteMovies.filter(
+        (title: string) => title !== movie.Title
+      );
+      localStorage.setItem('user', JSON.stringify(user));
+    });
   }
 
   showGenre(movie: any): void {
