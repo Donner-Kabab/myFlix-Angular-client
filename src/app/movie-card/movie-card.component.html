@@ -1,4 +1,16 @@
 <!-- src/app/movie-card/movie-card.component.html -->
+<nav class="navbar">
+  <div class="navbar-logo">
+    <img src="assets/logo.png" alt="My App Logo" />
+  </div>
+  <ul class="navbar-links">
+    <li><a routerLink="/movies">Home</a></li>
+    <li><a routerLink="/profile">Profile</a></li>
+  </ul>
+  <div class="navbar-actions">
+    <!-- Add login/logout buttons or user-related actions here -->
+  </div>
+</nav>
 <div style="display: flex">
   <mat-card *ngFor="let movie of movies" style="flex: 1 1 auto">
     <mat-card-header>
