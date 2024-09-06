@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { UserRegistrationService } from '../fetch-api-data.service';
 import { Router } from '@angular/router';
 import { MatDialog } from '@angular/material/dialog';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-movie-card',
@@ -13,7 +14,8 @@ export class MovieCardComponent implements OnInit {
   constructor(
     public fetchMovies: UserRegistrationService,
     private router: Router,
-    public dialog: MatDialog
+    public dialog: MatDialog,
+    private snackBar: MatSnackBar
   ) {}
 
   ngOnInit(): void {
@@ -38,6 +40,9 @@ export class MovieCardComponent implements OnInit {
       const user = JSON.parse(localStorage.getItem('user') || '');
       user.FavoriteMovies.push(movie.Title);
       localStorage.setItem('user', JSON.stringify(user));
+      this.snackBar.open('Movie added to favorites!', 'OK', {
+        duration: 2000,
+      });
     });
   }
 
@@ -48,6 +53,9 @@ export class MovieCardComponent implements OnInit {
         (title: string) => title !== movie.Title
       );
       localStorage.setItem('user', JSON.stringify(user));
+      this.snackBar.open('Movie removed from favorites', 'OK', {
+        duration: 2000,
+      });
     });
   }
 
